@@ -7,8 +7,10 @@ import Select from 'react-select';
 
 const onSubmit = (data:any) => {
   console.log(data);
+}
 
-
+const onSubmitEdit = (data:any) => {
+  console.log(data);
 }
 const roles = [
   { value: 'DEVELOPER', label: 'DEVELOPER' },
@@ -17,13 +19,14 @@ const roles = [
   { value: 'ADMIN', label: 'ADMIN' }
 ]
 function EmployeeRecords() {
-  // for showing modals
+  // for showing add modals
 const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 const [showEdit, setShowEdit] = useState(false);
 const handleCloseEdit = () => setShowEdit(false);
 const handleShowEdit = () => setShowEdit(true);
+
 //for react form validation
 const { register, handleSubmit, formState: { errors } } = useForm();
   return (
@@ -157,25 +160,45 @@ const { register, handleSubmit, formState: { errors } } = useForm();
     <Modal.Title>Edit Info</Modal.Title>
   </Modal.Header>
   <Modal.Body> 
-  <form>
+  <form onSubmit={handleSubmit(onSubmitEdit)}>
   <div className="row">
-    <div className="col-md-6">
-      <label>First Name</label>
-      <input type="text" className="form-control"  placeholder="First Name"/>
+    <div className="col-md-4">
+      <label>First Name *</label>
+      <input type="text" className="form-control"  placeholder="First Name" {...register("fname",{required: true})} />
+      {errors.fname && <span className="error">First Name is required</span>}
     </div>
-    <div className="col-md-6">
-      <label>Last Name</label>
-      <input type="text" className="form-control"  placeholder="Last Name"/>
+    <div className="col-md-4">
+      <label>Last Name *</label>
+      <input type="text" className="form-control"  placeholder="Last Name" {...register("lname",{required: true})}/>
+      {errors.lname && <span className="error">Last Name is required</span>}
+    </div>
+    <div className="col-md-4">
+      <label>Employee ID *</label>
+      <input type="text" className="form-control"  placeholder="Employee ID" {...register("empid",{required: true})}/>
+      {errors.empid && <span className="error">Employee ID is required</span>}
     </div>
   </div>
     <div className="row">
-    <div className="col-md-6">
-      <label>Position</label>
-      <input type="text" className="form-control"  placeholder="Position"/>
+    <div className="col-md-4">
+      <label>Position *</label>
+      {/* <input type="text" className="form-control"  placeholder="Position" {...register("position",{required: true})} /> */}
+      <Select options={roles}/>
+      {/* {errors.roles && <span className="error"> is required</span>} */}
     </div>
-    <div className="col-md-6">
-      <label>Email</label>
-      <input type="email" className="form-control"  placeholder="Email"/>
+    <div className="col-md-4">
+      <label>Email *</label>
+      <input type="email" className="form-control"  placeholder="Email"
+       {...register("email", { required: true , pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "invalid email address"
+      }})}
+      />
+       {errors.email && <span className="error">Email is required</span>}
+    </div>
+    <div className="col-md-4">
+      <label>DOJ *</label>
+      <input type="text" className="form-control"  placeholder="Date Of Joining" {...register("doj",{required: true})} />
+      {errors.doj && <span className="error">DOJ is required</span>}
     </div>
     </div>
    <div className="modal-footer">

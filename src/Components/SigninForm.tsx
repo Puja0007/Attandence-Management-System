@@ -55,7 +55,7 @@ const SigninForm = () => {
           </div>
           {errors.password && <span className="error">Password is required</span>}
           <div className="textbox-btn">
-          <button type="submit"  className="btn">LOGIN</button>
+          <button type="submit"  className="btn-login">LOGIN</button>
           </div>
           
          

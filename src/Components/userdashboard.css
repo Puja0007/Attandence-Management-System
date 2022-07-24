@@ -36,3 +36,7 @@ img{
 .card{
     width: 18rem;
 }
+.user-info{
+    font-weight: bold;
+    color: black;
+}

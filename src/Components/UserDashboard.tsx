@@ -28,10 +28,10 @@ function UserDashboard(){
         <Modal.Body>
         <div className="card">
   <ul className="list-group list-group-flush">
-    <li className="list-group-item"> <span>Name :</span> Puja Das</li>
-    <li className="list-group-item"><span>Position :</span>MTS</li>
-    <li className="list-group-item"><span>Emp ID :</span>MTS-3258</li>
-    <li className="list-group-item"><span>Depertment :</span>Developer</li>
+    <li className="list-group-item"> <span className="user-info">Name :</span> Puja Das</li>
+    <li className="list-group-item"><span className="user-info">Position :</span>MTS</li>
+    <li className="list-group-item"><span className="user-info">Emp ID :</span>MTS-3258</li>
+    <li className="list-group-item"><span className="user-info">Depertment :</span>Developer</li>
   </ul>
 </div>
         </Modal.Body>
