@@ -1,6 +1,11 @@
-import React from "react";
+import React,{useState} from "react";
 import './userdashboard.css';
+import { Modal, Button } from "react-bootstrap";
 function UserDashboard(){
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return(
         <div className="userdashboard">
             {/* <div className="userlogo"> */}
@@ -10,10 +15,32 @@ function UserDashboard(){
             <h2>Hi! I am Puja</h2>
             <br></br>
             <div className="user-btn">
-            <button type="button" className="btn" >PUNCH ATTENDANCE</button>
-            <button type="button" className="btn">APPLY FOR LEAVE</button>
-            <button type="button" className="btn">VIEW PREVIOUS RECORD</button>
+            {/* <button type="button" className="btn" >PUNCH ATTENDANCE</button>
+            <button type="button" className="btn">APPLY FOR LEAVE</button> */}
+            <button type="button" className="btn-information" onClick={handleShow}>VIEW OTHER INFORMATION</button>
             </div>
+
+
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>User Information</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <div className="card">
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item"> <span>Name :</span> Puja Das</li>
+    <li className="list-group-item"><span>Position :</span>MTS</li>
+    <li className="list-group-item"><span>Emp ID :</span>MTS-3258</li>
+    <li className="list-group-item"><span>Depertment :</span>Developer</li>
+  </ul>
+</div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </div>
     )
 }

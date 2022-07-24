@@ -18,6 +18,7 @@ function App() {
       <BrowserRouter>
       <Routes>
       <Route path="/employeerecords" element={ <EmployeeRecords/>}/>
+      <Route path="/userdashboard" element={ <UserDashboard/>}/>
               </Routes>
       </BrowserRouter>
      
