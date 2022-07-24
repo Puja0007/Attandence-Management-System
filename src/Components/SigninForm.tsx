@@ -28,21 +28,24 @@ const SigninForm = () => {
           <div className="textbox">
             <span className="fa fa-user" aria-hidden="true"></span>
             <input
-              type="text"
+              type="email"
               className="form-control"
-              placeholder="Username"
-              {...register("username", { required: true })}
+              placeholder="Email"
+              {...register("email", { required: true , pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address"
+              }})}
             />
             
           </div>
-          {errors.username && <span className="error">Username is required</span>}
+          {errors.email && <span className="error">Email is required</span>}
           <div className="textbox space">
             <span className="fa fa-lock" aria-hidden="true"></span>
             <input
               type="password"
               className="form-control"
               placeholder="Password"
-              {...register("password", {required: "required",
+              {...register("password", {required: true,
               minLength: {
                 value: 5,
                 message: "min length is 5"

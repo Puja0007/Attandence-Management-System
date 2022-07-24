@@ -2,14 +2,24 @@ import React,{useState} from 'react';
 import './EmployeeRecords.css';
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import { useForm } from "react-hook-form";
 
+
+const onSubmit = (data:any) => {
+  console.log(data);
+
+
+}
 function EmployeeRecords() {
-    const [show, setShow] = useState(false);
+  // for showing modals
+const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 const [showEdit, setShowEdit] = useState(false);
 const handleCloseEdit = () => setShowEdit(false);
 const handleShowEdit = () => setShowEdit(true);
+//for react form validation
+const { register, handleSubmit, formState: { errors } } = useForm();
   return (
     <div className="container">
         {/* <div className="table-header">
@@ -36,11 +46,10 @@ const handleShowEdit = () => setShowEdit(true);
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">Emp ID</th>
       <th scope="col">Position</th>
       <th scope="col">Email</th>
-      <th scope="col">Total Hrs</th>
-
-      <th scope="col">Daily Average Hrs</th>
+      <th scope="col">DOJ</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -82,32 +91,51 @@ const handleShowEdit = () => setShowEdit(true);
     <Modal.Title>Add Employee</Modal.Title>
   </Modal.Header>
   <Modal.Body> 
-  <form>
+  <form onSubmit={handleSubmit(onSubmit)}>
   <div className="row">
-    <div className="col-md-6">
-      <label>First Name</label>
-      <input type="text" className="form-control"  placeholder="First Name"/>
+    <div className="col-md-4">
+      <label>First Name *</label>
+      <input type="text" className="form-control"  placeholder="First Name" {...register("fname",{required: true})} />
+      {errors.fname && <span className="error">First Name is required</span>}
     </div>
-    <div className="col-md-6">
-      <label>Last Name</label>
-      <input type="text" className="form-control"  placeholder="Last Name"/>
+    <div className="col-md-4">
+      <label>Last Name *</label>
+      <input type="text" className="form-control"  placeholder="Last Name" {...register("lname",{required: true})}/>
+      {errors.lname && <span className="error">Last Name is required</span>}
+    </div>
+    <div className="col-md-4">
+      <label>Employee ID *</label>
+      <input type="text" className="form-control"  placeholder="Employee ID" {...register("empid",{required: true})}/>
+      {errors.empid && <span className="error">Employee ID is required</span>}
     </div>
   </div>
     <div className="row">
-    <div className="col-md-6">
-      <label>Position</label>
-      <input type="text" className="form-control"  placeholder="Position"/>
+    <div className="col-md-4">
+      <label>Position *</label>
+      <input type="text" className="form-control"  placeholder="Position" {...register("position",{required: true})} />
+      {errors.position && <span className="error">Last Name is required</span>}
     </div>
-    <div className="col-md-6">
-      <label>Email</label>
-      <input type="email" className="form-control"  placeholder="Email"/>
+    <div className="col-md-4">
+      <label>Email *</label>
+      <input type="email" className="form-control"  placeholder="Email"
+       {...register("email", { required: true , pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "invalid email address"
+      }})}
+      />
+       {errors.email && <span className="error">Email is required</span>}
+    </div>
+    <div className="col-md-4">
+      <label>DOJ *</label>
+      <input type="text" className="form-control"  placeholder="Date Of Joining" {...register("doj",{required: true})} />
+      {errors.doj && <span className="error">DOJ is required</span>}
     </div>
     </div>
    <div className="modal-footer">
    <Button variant="danger" className="cancel" onClick={handleClose} type="submit">
         Cancel
       </Button>
-   <Button variant="primary" className="save" onClick={handleClose} type="submit">
+   <Button variant="primary" className="save" type="submit">
         Submit
       </Button>
     

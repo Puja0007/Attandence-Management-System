@@ -17,6 +17,7 @@ function App() {
       {/* <AttendanceTable/> */}
       <BrowserRouter>
       <Routes>
+        <Route path="/" element={<SigninForm/>} />
       <Route path="/employeerecords" element={ <EmployeeRecords/>}/>
       <Route path="/userdashboard" element={ <UserDashboard/>}/>
               </Routes>
