@@ -3,13 +3,19 @@ import './EmployeeRecords.css';
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import { useForm } from "react-hook-form";
-
+import Select from 'react-select';
 
 const onSubmit = (data:any) => {
   console.log(data);
 
 
 }
+const roles = [
+  { value: 'DEVELOPER', label: 'DEVELOPER' },
+  { value: 'QA', label: 'QA' },
+  { value: 'DEVOPS', label: 'DEVOPS' },
+  { value: 'ADMIN', label: 'ADMIN' }
+]
 function EmployeeRecords() {
   // for showing modals
 const [show, setShow] = useState(false);
@@ -112,7 +118,8 @@ const { register, handleSubmit, formState: { errors } } = useForm();
     <div className="row">
     <div className="col-md-4">
       <label>Position *</label>
-      <input type="text" className="form-control"  placeholder="Position" {...register("position",{required: true})} />
+      {/* <input type="text" className="form-control"  placeholder="Position" {...register("position",{required: true})} /> */}
+      <Select options={roles} />
       {errors.position && <span className="error">Last Name is required</span>}
     </div>
     <div className="col-md-4">
